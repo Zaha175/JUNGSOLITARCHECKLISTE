@@ -35,9 +35,15 @@
             background-color: transparent; /* Macht den Hintergrund der Section durchsichtig */
         }
         .section h2 {
-            font-size: 1.2em;
+            font-size: 1.4em; /* Größer */
             margin-bottom: 10px;
-            color: #000080; /* Dunkelblau */
+            color: #000066; /* Dunkleres Blau */
+            font-weight: bold; /* Fett */
+        }
+        .section h3 {
+            font-size: 1.2em; /* Größer */
+            margin-bottom: 10px;
+            color: #000066; /* Dunkleres Blau */
             font-weight: bold; /* Fett */
         }
         .section ul {
@@ -82,6 +88,18 @@
             padding: 10px;
             border-radius: 5px;
             background-color: #f5f5f5;
+        }
+
+        /* Media Queries für die mobile Optimierung */
+        @media (max-width: 768px) {
+            .section li {
+                flex-direction: column; /* Checkbox und Text untereinander */
+            }
+
+            .info, .info-16-8 {
+                margin-left: 0; /* Einzug entfernen */
+                font-size: 0.8em; /* Text etwas kleiner */
+            }
         }
     </style>
 </head>
@@ -264,5 +282,24 @@
     <div class="footer">
         © 2024 – Individuelle Checkliste zur Verbesserung der Lebenserwartung
     </div>
+    <script>
+    // JavaScript zum Speichern des Fortschritts im Local Storage
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const checkboxes = document.querySelectorAll('.section input[type="checkbox"]');
+
+        // Laden des gespeicherten Zustands beim Seitenaufruf
+        checkboxes.forEach(checkbox => {
+            const isChecked = localStorage.getItem(checkbox.id) === 'true';
+            checkbox.checked = isChecked;
+        });
+
+        // Speichern des Zustands bei jeder Änderung
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        });
+    });
+    </script>
 </body>
 </html>
